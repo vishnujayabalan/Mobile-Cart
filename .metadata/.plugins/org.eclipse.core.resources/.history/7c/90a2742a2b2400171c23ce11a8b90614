@@ -1,0 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title></title>
+<style >
+
+html, body {
+  font-family: 'Lato', serif;  
+}
+.navbar-fault {
+  font-size: 1.15em;
+  font-weight: 400;
+  background-color: #006b96 ;
+  padding: 10px;
+  border: 0px;
+  border-radius: 0px;
+}
+.navbar-fault .navbar-nav>li>a {
+  color: white ;
+}
+.navbar-fault .navbar-nav>li>a:hover {
+  color: #006b96;
+}
+.navbar-fault .navbar-brand {
+  color: #002433;
+}
+.navbar-fault .navbar-brand:hover {
+  color:  #006b96;
+  text-shadow: 1px -1px 8px #b3e9ff;
+}
+
+.navbar-fault .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+  background-color: #004059;
+  color: white;
+}
+
+.navbar-fault .navbar-toggle {
+  border: none;
+}
+
+.navbar-fault .navbar-collapse, .navbar-default .navbar-form {
+  border: none;
+}
+
+.navbar-fault .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color:  #006b96;
+}
+
+.navbar-fault .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+</style>
+</head>
+<body>
+
+</body>
+</html>

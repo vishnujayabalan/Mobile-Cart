@@ -127,6 +127,8 @@ public ModelAndView logout()
 	mv.addObject("home","true");
 	session.removeAttribute("User_id");
 	session.removeAttribute("user");
+	session.removeAttribute("user");
+	session.removeAttribute("thisadmin");
 	mv.addObject("slide",true);
 	return mv;
 }

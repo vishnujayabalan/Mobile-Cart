@@ -56,7 +56,8 @@ if(user.getPassword().equalsIgnoreCase(password))
 		if(userDAO.getRole(id).equalsIgnoreCase(a))
 		{
 		ModelAndView m=new ModelAndView("/index");
-		m.addObject("thisadmin","true");
+		session.setAttribute("thisadmin",true);
+		m.addObject("admin","true");
 		return m;
 		}else
 		{

@@ -26,6 +26,11 @@ if ( x=="" ||  y=="" ||
 alert("Please fill all the inputs");
 return false;
 }
+if(q!=w)
+	{
+	alert("Passwords and Confirmpassword must be same");
+	return false;
+	}
 	return true;
 }
 </script>

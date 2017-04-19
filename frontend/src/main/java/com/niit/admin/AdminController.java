@@ -31,7 +31,7 @@ public class AdminController
 	@RequestMapping("/clickcate")
 	public ModelAndView cate(Map<String, Object> map)
 	{
-	ModelAndView mv=new ModelAndView("/Categoryadd");
+	ModelAndView mv=new ModelAndView("/index");
 	List<Category> categoryList=	categoryDAO.list();
 	  mv.addObject("categoryList", categoryList);
 	  mv.addObject("category", category);
@@ -41,7 +41,7 @@ public class AdminController
 	@RequestMapping("/clicksup")
 	public ModelAndView supply(Map<String, Object> map)
 	{
-		ModelAndView m=new ModelAndView("/Supplieradd");
+		ModelAndView m=new ModelAndView("/index");
 		 List<Supplier> supplierList=	supplierDAO.list();
 		  m.addObject("supplierList", supplierList);
 		  m.addObject("supplier", supplier);
@@ -51,7 +51,7 @@ public class AdminController
 	@RequestMapping("/clickprod")
 	public ModelAndView prod(Map<String, Object> map)
 	{
-		ModelAndView m=new ModelAndView("/Productadd");
+		ModelAndView m=new ModelAndView("/index");
 		  List<Product> productList=	productDAO.list();
 		  m.addObject("productList", productList);
 		  m.addObject("product", product);

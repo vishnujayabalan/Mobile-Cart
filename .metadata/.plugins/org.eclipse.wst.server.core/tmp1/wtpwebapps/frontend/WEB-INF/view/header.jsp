@@ -97,6 +97,9 @@ html, body {
     <c:if test="${user==true }">  
  <li><a href="clickout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
  </c:if>
+  <c:if test="${!empty thisadmin}">  
+ <li><a href="clickout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+ </c:if>
          </ul>
     </div>
   </div>

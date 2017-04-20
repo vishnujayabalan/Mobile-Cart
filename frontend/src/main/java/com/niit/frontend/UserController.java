@@ -1,6 +1,8 @@
 package com.niit.frontend;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;;
 
 public class UserController {
 
+private static final Logger log=LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private ProductDAO productDAO;
 @Autowired	
@@ -30,7 +33,7 @@ public ModelAndView createRegister(@RequestParam("userid")String id,
 		@RequestParam("cpwd")String confirmpassword)
 {
 	 
-	 System.out.println("register");
+	log.debug("start create register method");
 	 user.setRole("USER");
 	user.setId(id);
 	user.setName(name);
@@ -38,16 +41,17 @@ public ModelAndView createRegister(@RequestParam("userid")String id,
 	user.setPassword(password);
 	user.setConfirmpassword(confirmpassword);
 	userDAO.saveUser(user);
-	
+	log.debug("save user details in database");
 	ModelAndView m=new ModelAndView("redirect:/regis");
 	m.addObject("regiser","true");
+	log.debug("end create register method");
 	return m;
 }
  @PostMapping("/validation")
  public ModelAndView valid(@RequestParam("userid") String id,@RequestParam("pwd") String password)
  {
 	 String a="ADMIN";
-	 
+	 log.debug("start validation method");
 if((userDAO.getUserById(id))!=null)
 {
 	User user=userDAO.getUserById(id);
@@ -58,6 +62,7 @@ if(user.getPassword().equalsIgnoreCase(password))
 		ModelAndView m=new ModelAndView("/index");
 		session.setAttribute("thisadmin",true);
 		m.addObject("admin","true");
+		 log.debug("admin login");
 		return m;
 		}else
 		{
@@ -70,6 +75,7 @@ if(user.getPassword().equalsIgnoreCase(password))
 		 m.addObject("product","true");
 		 m.addObject("prList",productDAO.list());
 		 m.addObject("path",path);
+		 log.debug("user login");
 	    return m;
 		}
 	}else
@@ -78,6 +84,7 @@ if(user.getPassword().equalsIgnoreCase(password))
 		m.addObject("passwordfailure","true");
 		m.addObject("clicklogin","true");
 		m.addObject("msg","Incorrect password!");
+		log.debug("login failure due to wrong password");
 		return m;
 	}
 }else

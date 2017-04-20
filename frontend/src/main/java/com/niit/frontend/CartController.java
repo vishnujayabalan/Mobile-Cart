@@ -5,11 +5,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.niit.backend.dao.ProductDAO;
 import com.niit.backend.dao.MycartDAO;
@@ -20,6 +21,7 @@ import com.niit.backend.model.Product;
 import org.springframework.stereotype.Controller;
 @Controller
 public class CartController {
+	private static final Logger log=LoggerFactory.getLogger(CartController.class);
 	@Autowired
 	private MycartDAO cartDAO;
 	@Autowired
@@ -35,6 +37,7 @@ Date today = new Date(d);
 @RequestMapping("mycart")
 public ModelAndView showmycart()
 {
+	log.debug("start add cart method");
 	String id=(String) session.getAttribute("User_id");
 	List<Mycart> list= cartDAO.getallcartdetails(id);
 	ModelAndView mv= new ModelAndView("/index");
@@ -49,7 +52,7 @@ public ModelAndView showmycart()
 @GetMapping("/addtocart/{id}")
 public ModelAndView savecart(@PathVariable ("id") String productid )
 {	
-	
+	log.debug("start add cart method");
 	String id=(String) session.getAttribute("User_id");
 
 
@@ -66,11 +69,13 @@ public ModelAndView savecart(@PathVariable ("id") String productid )
 		mycart.setUser_id(id);
 		cartDAO.save(mycart);
 		ModelAndView mv= new ModelAndView("redirect:/mycart");
+		log.debug("end add cart method");
 			return mv;
 	}else
 	
 	{
 	ModelAndView mv=new ModelAndView("redirect:/clicklog");
+	log.debug("redirect user to login page b");
 	return mv;
 	}
 }
@@ -79,9 +84,11 @@ public ModelAndView savecart(@PathVariable ("id") String productid )
 @GetMapping("/deletecart/{id}")
 public ModelAndView deletecart(@PathVariable("id")int id)
 {
+	log.debug("start deletecart method");
 	Mycart mycart= cartDAO.getbyid(id);
 	cartDAO.delete(mycart);
 	ModelAndView mv=new ModelAndView("redirect:/mycart");
+	log.debug("end deletecart method");
 	return mv;
 	
 }
@@ -89,6 +96,7 @@ public ModelAndView deletecart(@PathVariable("id")int id)
 @RequestMapping("/increasequantity/{id}")
 public ModelAndView increasequantity(@PathVariable("id")int id)
 {
+	log.debug("start increasequantity  method");
 	Mycart mycart=cartDAO.getbyid(id);
 	int qty=mycart.getQuantity();
 	double rate=((mycart.getPrice()/mycart.getQuantity())+mycart.getPrice());
@@ -97,6 +105,7 @@ public ModelAndView increasequantity(@PathVariable("id")int id)
 	mycart.setPrice(rate);
 	cartDAO.update(mycart);
 	ModelAndView mv=new ModelAndView("redirect:/mycart");
+	log.debug(" end increasequantity  method");
 	return mv;
 }
 
@@ -104,12 +113,14 @@ public ModelAndView increasequantity(@PathVariable("id")int id)
 public ModelAndView decreasequantity(@PathVariable ("id")int id)
 {
 	
+	log.debug("start decreasequantity  method");
 	Mycart mycart=cartDAO.getbyid(id);
 	int qty=mycart.getQuantity();
 	double rate=(mycart.getPrice()-(mycart.getPrice()/mycart.getQuantity()));
 	if(qty<=1)
 	{
 		 ModelAndView mv1= new ModelAndView("redirect:/mycart");
+		 log.debug("end decreasequantity  method");
 		return mv1;
 	}
 	qty=qty-1;
@@ -117,12 +128,13 @@ public ModelAndView decreasequantity(@PathVariable ("id")int id)
 	mycart.setPrice(rate);
 	cartDAO.update(mycart);
 	ModelAndView mv=new ModelAndView("redirect:/mycart");
+	log.debug("end decreasequantity  method");
 	return mv;
 }
 @RequestMapping("/clickout")
 public ModelAndView logout()
 {
-	
+	log.debug("start logout  method");
 	ModelAndView mv=new ModelAndView("/index");
 	mv.addObject("home","true");
 	session.removeAttribute("User_id");
@@ -130,6 +142,7 @@ public ModelAndView logout()
 	session.removeAttribute("user");
 	session.removeAttribute("thisadmin");
 	mv.addObject("slide",true);
+	log.debug("end logout  method");
 	return mv;
 }
 

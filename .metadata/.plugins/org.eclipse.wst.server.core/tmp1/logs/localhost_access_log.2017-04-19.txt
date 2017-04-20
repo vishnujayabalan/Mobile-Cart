@@ -4,3 +4,14 @@
 0:0:0:0:0:0:0:1 - - [19/Apr/2017:12:49:49 +0530] "GET /frontend/regis HTTP/1.1" 200 7909
 0:0:0:0:0:0:0:1 - - [19/Apr/2017:12:50:51 +0530] "GET /frontend/regis HTTP/1.1" 200 7909
 0:0:0:0:0:0:0:1 - - [19/Apr/2017:12:51:01 +0530] "GET /frontend/regis HTTP/1.1" 200 7909
+127.0.0.1 - - [19/Apr/2017:13:32:15 +0530] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:32:16 +0530] "GET /frontend/ HTTP/1.1" 200 6492
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:32:16 +0530] "GET /frontend/image/img1.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:32:47 +0530] "GET /frontend/clicklog HTTP/1.1" 200 7111
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:32:57 +0530] "POST /frontend/validation HTTP/1.1" 200 10451
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:38:14 +0530] "POST /frontend/validation HTTP/1.1" 200 9120
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:38:30 +0530] "GET /frontend/clickout HTTP/1.1" 200 6492
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:38:31 +0530] "GET /frontend/clicklog HTTP/1.1" 200 7111
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:38:42 +0530] "POST /frontend/validation HTTP/1.1" 200 5376
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:38:44 +0530] "GET /frontend/clickprod HTTP/1.1" 200 8811
+0:0:0:0:0:0:0:1 - - [19/Apr/2017:13:39:02 +0530] "GET /frontend/clickout HTTP/1.1" 200 6492

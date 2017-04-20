@@ -40,7 +40,7 @@
 <c:if test="${not empty category}">
 	<jsp:include page="Categoryadd.jsp"></jsp:include> 
 </c:if>
-<c:if test="${not empty product}">
+<c:if test="${not empty pro}">
 	<jsp:include page="Productadd.jsp"></jsp:include> 
 </c:if>
 <c:if test="${not empty supplier}">

@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +26,7 @@ import com.niit.backend.model.Product;
 @Controller
 public class ProductController {
 	
-	
+	private static final Logger log=LoggerFactory.getLogger(ProductController.class);
 	
 	@Autowired
 	private ProductDAO productDAO;
@@ -41,7 +44,7 @@ public class ProductController {
 			@RequestParam("name")String name, @RequestParam("categoryid")String categoryid , @RequestParam("supplierid")String supplierid , 
 			@RequestParam("price")double price, @RequestParam("quantity")String quantity,@RequestParam("productimages")MultipartFile images)
 	{
-		
+		log.debug("Start product method");
 		product.setId(id);
 		product.setName(name);
 		product.setCategoryid(categoryid);
@@ -63,7 +66,6 @@ public class ProductController {
 			try
 			{
 			  byte[] bytes=filedet.getBytes();
-			  System.out.println(bytes.length);
 			  FileOutputStream fos=new FileOutputStream(f);
 			  BufferedOutputStream bs=new BufferedOutputStream(fos);
               			bs.write(bytes);
@@ -72,12 +74,12 @@ public class ProductController {
 			}
 			catch(Exception e)
 			{
-				System.out.println("Exception Arised"+e);
+				log.debug("Exception Arised"+e);
 			}
 		}
 		else
 		{
-			System.out.println("File is Empty not Uploaded");
+			log.debug("File is Empty not Uploaded");
 			
 		}
 		
@@ -88,21 +90,24 @@ public class ProductController {
 	@GetMapping("/manage_product_delete/{id}")
 	public ModelAndView deleteProduct(@PathVariable("id") String id)
 	{
+		log.debug("Start product delete method");
 		ModelAndView mv = new ModelAndView("redirect:/clickprod");
 		
 		productDAO.delete(id);
-		
+		log.debug("end product delete method");
 		return mv;
 		
 		
 	}
 	@RequestMapping("/findProduct")
-	public ModelAndView findSupplier(@RequestParam("id") String id, Map<String, Object> map)
+	public ModelAndView findProduct(@RequestParam("id") String id, Map<String, Object> map)
 	{
+		log.debug("Start findProduct method");
 		Product product=productDAO.getProductByID(id);
 		ModelAndView mv=new ModelAndView("/productdetails","command", new Product() );
 		mv.addObject("proFound",product);
 		mv.addObject("click","true");
+		log.debug("end findProduct method");
 		return mv;
 	}
 	
@@ -111,6 +116,7 @@ public class ProductController {
 			@RequestParam("name")String name,  @RequestParam("categoryid")String categoryid , @RequestParam("supplierid")String supplierid , 
 			@RequestParam("price")double price, @RequestParam("quantity")String quantity )
 	{
+		log.debug("Start product edit method");
 		product.setId(id);
 		product.setName(name);
 		product.setCategoryid(categoryid);
@@ -119,16 +125,21 @@ public class ProductController {
 		product.setQuantity(quantity);
 		productDAO.update(product);		
 		ModelAndView mv = new ModelAndView("redirect:/clickprod");
+		log.debug("end product edit method");
 		return mv;
 	}
 	@RequestMapping("/selProductView")
+	
 	public ModelAndView viewProduct(Map<String, Object> map)
-	{	String path="D:\\eclipse\\workspace\\Main\\frontend\\src\\main\\resources\\images\\";
+	{
+		log.debug("show productview page");
+	String path="D:\\eclipse\\workspace\\Main\\frontend\\src\\main\\resources\\images\\";
 		List<Product> prodList=productDAO.list();
 		map.put("prList", prodList );
 		map.put("path", path);
 		ModelAndView mv=new ModelAndView("/index",map);
 		mv.addObject("clickpro",true);
+		log.debug("end productview page  showmethod");
 		return mv;
 	}
 	

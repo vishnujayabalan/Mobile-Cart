@@ -2,7 +2,8 @@ package com.niit.frontend;
 
 import javax.servlet.http.HttpSession;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,24 +11,27 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController 
 {
+	private static final Logger log=LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private HttpSession session;
 	@RequestMapping("/")
 	public ModelAndView show()
 	{
-		System.out.println("Inside show()");
+		log.debug("show the home page");
 		ModelAndView mv=new ModelAndView("/index");
 		mv.addObject("showPage", "indexPage");
 	      mv.addObject("home",true);
 	      mv.addObject("slide",true);
+	      log.debug("end show the home page method");
 		return mv;
 	}
 	@RequestMapping("/admin")
 	public ModelAndView admin()
 	{
-		System.out.println("Inside ()");
+		log.debug("show the admin page");
 		ModelAndView mv=new ModelAndView("/index");
 		mv.addObject("admin","true");
+		log.debug("end show the admin page method ");
 		return mv;
 	}
 	@RequestMapping("/click")
@@ -35,19 +39,21 @@ public class HomeController
 	{
 		
 		ModelAndView mv=new ModelAndView("/index");
+		log.debug("return home page method");
 		mv.addObject("home",true);
 		session.removeAttribute("User_id");
 		session.removeAttribute("click");
 		session.removeAttribute("user");
 		session.removeAttribute("thisadmin");
 		mv.addObject("slide",true);
+		log.debug("end return home show method");
 		return mv;
 	}
 	
 	@RequestMapping("/clicklog")
 	public ModelAndView log()
 	{
-		System.out.println("Inside log ()");
+		log.debug("show  login page ");
 		ModelAndView mv=new ModelAndView("/index");
 		mv.addObject("clicklogin","true");
 		mv.addObject("home",true);
@@ -56,7 +62,7 @@ public class HomeController
 	@RequestMapping("/regis")
 	public ModelAndView register()
 	{
-		System.out.println("Inside ()");
+		log.debug("show the register page");
 		ModelAndView mv=new ModelAndView("/index");
 		mv.addObject("clickreg","true");
 		mv.addObject("home",true);
